@@ -1,0 +1,13 @@
+body {
+    background-color: lightblue;
+    font-family: Arial;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+h2 {
+    color: darkblue;
+}

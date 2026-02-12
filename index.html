@@ -3,132 +3,49 @@
 <head>
     <title>Student Registration Form</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-        input {
-            padding: 5px;
-            width: 220px;
-        }
-        #msg {
-            font-weight: bold;
-            color: red;
-        }
-        button {
-            padding: 6px 12px;
-        }
-    </style>
 </head>
 
 <body>
 
-<h2 id="heading">Student Registration Form</h2>
+<h2 id="title">Student Registration Form</h2>
 
-<form id="regForm">
-    Username: <input type="text" id="username"><br><br>
-    Email: <input type="text" id="email"><br><br>
-    Phone: <input type="text" id="phone"><br><br>
-    Password: <input type="password" id="password"><br><br>
-    Confirm Password: <input type="password" id="cpassword"><br><br>
+<form onsubmit="return validateForm()">
 
-    <button type="submit" id="submitBtn">Register</button>
+    Username:
+    <input type="text" id="username"><br><br>
+
+    Email:
+    <input type="text" id="email"><br><br>
+
+    Phone:
+    <input type="text" id="phone"><br><br>
+
+    Password:
+    <input type="password" id="password"><br><br>
+
+    Confirm Password:
+    <input type="password" id="confirm"><br><br>
+
+    <button type="submit" id="submitBtn">Submit Form</button>
 </form>
 
-<p id="msg"></p>
+<p id="error" class="error"></p>
 
 <hr>
 
-<img id="img" src="https://via.placeholder.com/150">
+<img id="myImg" src="https://via.placeholder.com/150">
 <br><br>
 <button onclick="changeImage()">Change Image</button>
 
-<script>
-/* ---------- JavaScript Form Validation & DOM ---------- */
+<p id="welcome">Welcome Student!</p>
 
-document.getElementById("regForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+<button id="jqueryBtn">jQuery Change Button Text</button>
 
-    let username = document.getElementById("username").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let password = document.getElementById("password").value;
-    let cpassword = document.getElementById("cpassword").value;
-    let msg = document.getElementById("msg");
-
-    if (username === "" || email === "" || phone === "" || password === "" || cpassword === "") {
-        msg.innerHTML = "All fields are mandatory!";
-        return;
-    }
-
-    if (!/^[0-9]{10}$/.test(phone)) {
-        msg.innerHTML = "Phone number must be 10 digits!";
-        return;
-    }
-
-    let emailPattern = /^[a-zA-Z]+@[a-zA-Z]{3}\.[a-zA-Z]{2,3}$/;
-    if (!emailPattern.test(email)) {
-        msg.innerHTML = "Invalid Email Address!";
-        return;
-    }
-
-    let passPattern = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[&$#@]).{7,}$/;
-    if (!passPattern.test(password)) {
-        msg.innerHTML = "Password must contain capital, digit & special character!";
-        return;
-    }
-
-    if (password !== cpassword) {
-        msg.innerHTML = "Passwords do not match!";
-        return;
-    }
-
-    msg.style.color = "green";
-    msg.innerHTML = "Registration Successful!";
-});
-
-/* ---------- DOM Image Change ---------- */
-function changeImage() {
-    document.getElementById("img").src = "https://via.placeholder.com/150/0000FF";
-}
-
-/* ---------- Create & Append Node ---------- */
-let p = document.createElement("p");
-p.innerHTML = "Welcome Student!";
-document.body.appendChild(p);
-
-/* ---------- jQuery Section ---------- */
-$(document).ready(function () {
-
-    // Change button text
-    $("#submitBtn").text("Submit Form");
-
-    // Change background image
-    $("body").css("background-image", "linear-gradient(to right, #e3f2fd, #bbdefb)");
-
-    // Access form data
-    $("#submitBtn").click(function () {
-        console.log($("#username").val());
-    });
-
-    // Add attribute
-    $("#username").attr("placeholder", "Enter Username");
-
-    // Ajax example
-    $.ajax({
-        url: "https://jsonplaceholder.typicode.com/posts",
-        method: "GET",
-        success: function () {
-            console.log("Ajax call successful");
-        }
-    });
-});
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
